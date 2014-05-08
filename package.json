@@ -1,6 +1,7 @@
 {
-  "name": "hexo-site",
+  "name": "atian25.github.io",
   "version": "2.5.6",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+  }
 }
