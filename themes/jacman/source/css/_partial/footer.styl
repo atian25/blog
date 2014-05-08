@@ -1,0 +1,129 @@
+footer
+  margin-top 1em
+  background color-footer
+  padding 0 2% 0.5em
+
+#footer
+  width 95%
+  margin 0 auto
+  overflow hidden
+  position relative
+  .line
+    width 100%
+    height 14em
+    margin 0 auto
+    @media mini
+      width 10em
+      float left
+      position relative
+    span
+      display block
+      width 0.5em
+      height 6.25em
+      border-right 0.125em solid color-white
+      margin 0 auto
+      @media mini
+        position absolute
+        left 3em
+        margin 0 0 1.5em
+
+.author
+  width w=(110/16)em
+  height w
+  margin 0 auto
+  if dataURI
+    background no-repeat url(author-img-data) left top
+  else
+    background no-repeat url(root+author-img) left top 
+  background-size w w
+  border-radius (w/2)
+  transition transform 2s ease-out
+  &:hover
+    transform rotateZ(360deg)
+  @media mini
+    position: absolute;
+    top 6em
+    margin 0 0 1.5em
+
+.info
+  if ShowCustomFont
+    font-family font-custom-family
+    font-smoothing()
+    font-size font-size+50
+    line-height 1.3em
+  else
+    font-family font-default
+    line-height line-height+0.15
+  width 90%
+  margin 0 auto
+  color color-white
+  @media mini
+    margin 4.5em 0 2em 0
+    float left
+    width 75%
+
+.social-font
+  width 100%
+  margin 0 auto
+  float left
+  padding-left 3%
+  @media phone
+    padding-left 20%
+  @media mini
+    width 18em 
+    position absolute  
+    right -3em
+    top 3em
+  a
+    float left
+    display block
+    width 14%
+    color color-white
+    font-size font-size+80
+    padding 0.5em
+    @media tablet
+      padding 0.3em
+    &:hover:before
+      color color-blue
+
+.icon-weibo:before,.icon-github:before,.icon-twitter:before,.icon-facebook:before,.icon-stack-overflow:before,.icon-email:before,.icon-google_plus:before
+  font-family font-icon-family
+  font-smoothing()
+ 
+.icon-weibo:before
+  content "\f18a"
+.icon-github:before
+  content "\f09b"
+.icon-twitter:before
+ content "\f099"
+.icon-facebook:before
+  content "\f09a"
+.icon-stack-overflow:before
+  content "\f16c"
+.icon-email:before
+  content: "\f003"
+.icon-google_plus:before
+  content "\f0d5"
+.icon-douban:before
+  font-family font-icon-diao
+  font-smoothing()
+  content "\f111"
+
+
+.copyright
+  if ShowCustomFont
+    font-smoothing()
+    font-family font-custom-family
+  else
+    font-family font-default
+    font-size 0.6em
+  width 100%
+  color color-white
+  text-align center
+  @media mini
+    float left
+  a
+    color color-blue
+    &:hover
+      color color-blue
+      text-decoration underline

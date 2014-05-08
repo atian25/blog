@@ -1,0 +1,157 @@
+// More theme here http//softwaremaniacs.org/media/soft/highlight/test.html
+// Just change those colors
+// https//github.com/chriskempson/tomorrow-theme
+highlight-background = #2d2d2d
+highlight-current-line = #393939
+highlight-line-numbers = #666
+highlight-selection = #515151
+highlight-foreground = #cccccc
+highlight-comment = #999999
+highlight-red = #f2777a
+highlight-orange = #f99157
+highlight-yellow = #ffcc66
+highlight-green = #99cc99
+highlight-aqua = #66cccc
+highlight-blue = #6699cc
+highlight-purple = #cc99cc
+
+$code-block
+  background highlight-background
+  margin 0.5em 0
+  padding 0.5em 2%
+  color highlight-foreground
+  line-height line-height
+  font-size 0.1em
+  -webkit-border-radius 0.35em
+  border-radius 0.35em
+  @media phone
+    font-size 0.95em
+
+$line-numbers
+  color highlight-line-numbers 
+  font-size 0.95em
+  line-height line-height
+
+.article-content   
+  pre
+    font-family font-mono
+    @extend $code-block
+    background color-quote
+    border 1px solid #ccc
+    code
+      color color-heading
+      background none
+      text-shadow none
+      padding 0
+  .highlight
+    @extend $code-block
+    overflow auto
+    pre
+      @extend $code-block
+      border none
+      margin 0
+      padding 0
+    table
+      margin 0
+      width auto
+    td
+      border none
+      padding 0
+    figcaption
+      clearfix()
+      font-size 0.85em
+      text-align left
+      color highlight-comment
+      line-height 1em
+      padding 0.5em 0
+      margin-bottom 0.5em
+      a
+        float right
+    .gutter pre
+      @extend $line-numbers
+      text-align right
+      padding-right 1.5em
+  .gist
+    margin 0.5em 0
+    background highlight-background
+    padding 1em 2%
+    .gist-file
+      border none
+      font-family font-mono
+      margin 0
+      .gist-data
+        background none
+        border none
+        .line-numbers
+          @extend $line-numbers
+          background none
+          border none
+          padding 0 1.5em 0 0
+        .line-data
+          padding 0 !important
+      .highlight
+        margin 0
+        padding 0
+        border none
+      .gist-meta
+        background highlight-background
+        color highlight-comment
+        font 0.85em font-serif
+        text-shadow 0 0
+        padding 0
+        margin-top 1em
+        a
+          color color-blue
+          font-weight normal
+          &:hover
+            color color-theme
+
+pre
+  .comment
+  .title
+    color highlight-comment
+  .variable
+  .attribute
+  .tag
+  .regexp
+  .ruby .constant
+  .xml .tag .title
+  .xml .pi
+  .xml .doctype
+  .html .doctype
+  .css .id
+  .css .class
+  .css .pseudo
+    color highlight-red
+  .number
+  .preprocessor
+  .built_in
+  .literal
+  .params
+  .constant
+    color highlight-orange
+  .class
+  .ruby .class .title
+  .css .rules .attribute
+    color highlight-green
+  .string
+  .value
+  .inheritance
+  .header
+  .ruby .symbol
+  .xml .cdata
+    color highlight-green
+  .css .hexcolor
+    color highlight-aqua
+  .function
+  .python .decorator
+  .python .title
+  .ruby .function .title
+  .ruby .title .keyword
+  .perl .sub
+  .javascript .title
+  .coffeescript .title
+    color highlight-blue
+  .keyword
+  .javascript .function
+    color highlight-purple

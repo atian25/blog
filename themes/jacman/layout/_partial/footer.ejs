@@ -1,0 +1,51 @@
+<div id="footer" >
+	<% if(theme.author_img_enable == true){ %>
+	<div class="line">
+		<span></span>
+		<% if(theme.author.weibo){ %>
+		<a href="http://weibo.com/<%= theme.author.weibo %>" target="_blank"><div class="author"></div></a>
+		<% }else{ %>
+		<div class="author"></div>
+		<% }%>
+	</div>
+	<% } %>
+	<% if(theme.author.intro_line1&&theme.author.intro_line2){ %>
+	<section class="info">
+		<p> <%= theme.author.intro_line1 %> <br/>
+			<%= theme.author.intro_line2 %></p>
+	</section>
+	 <% } %>
+	<div class="social-font" class="clearfix">
+		<% if(theme.author.weibo){ %>
+		<a href="http://weibo.com/<%= theme.author.weibo %>" target="_blank" class="icon-weibo" title="weibo"></a>
+		<% } %>
+		<% if(theme.author.github){ %>
+		<a href="https://github.com/<%=theme.author.github %>" target="_blank" class="icon-github" title="github"></a>
+		<% } %>
+		<% if(theme.author.stackoverflow){ %>
+		<a href="http://stackoverflow.com/users/<%=theme.author.stackoverflow %>" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		<% } %>
+		<% if(theme.author.twitter){ %>
+		<a href="https://twitter.com/<%=theme.author.twitter %>" target="_blank" class="icon-twitter" title="twitter"></a>
+		<% } %>
+		<% if(theme.author.facebook){ %>
+		<a href="https://www.facebook.com/<%=theme.author.facebook %>" target="_blank" class="icon-facebook" title="facebook"></a>
+		<% } %>
+		<% if(theme.author.douban){ %>
+		<a href="https://www.douban.com/people/<%=theme.author.douban %>" target="_blank" class="icon-douban" title="豆瓣"></a>
+		<% } %>
+		<% if(theme.author.google_plus){ %>
+		<a href="https://plus.google.com/<%=theme.author.google_plus %>?rel=author" target="_blank" class="icon-google_plus" title="Google+"></a>
+		<% } %>
+		<% if(theme.author.email){ %>
+		<a href="mailto:<%=theme.author.email %>" target="_blank" class="icon-email" title="Email Me"></a>
+		<% } %>
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © <%= new Date().getFullYear() %> 
+		<% if (config.author) { %>
+		<a href="<%= config.url %>/about" target="_blank" title="<%= config.author %>"><%= config.author %></a>
+		<% } else {%>
+		<a href="<%= config.url %>" title="<%= config.title %>"><%= config.title %></a>
+		<% } %>
+		</p>
+</div>

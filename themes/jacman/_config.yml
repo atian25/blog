@@ -1,0 +1,102 @@
+##### Menu
+menu:
+  首页: /
+  归档: /archives
+  关于: /about
+## you can create `tags` and `categories` folders in `../source`.
+## And create a `index.md` file in each of them.
+## set `front-matter`as
+## layout: tags (or categories)
+## title: tags (or categories)
+## ---
+
+#### Widgets
+widgets: 
+- category
+- tag
+- links
+- rss
+## provide six widgets:category,tag,rss,archive,tagcloud,links.
+## modify links in `/layout/_widget/links.ejs`.
+
+#### RSS 
+rss: /atom.xml ## RSS address.
+
+#### Image
+imglogo:
+  enable: true             ## display image logo true/false.
+  src: img/logo.png        ## `.svg` and `.png` are recommended,please put image into the theme folder `/jacman/source/img`.
+favicon: img/favicon.ico   ## size:32px*32px,`.ico` is recommended,please put image into the theme folder `/jacman/source/img`.     
+apple_icon: img/jacman.png  ## size:114px*114px,please put image into the theme folder `/jacman/source/img`.
+
+#### Author Avatar Picture
+author_img_enable: true ## display author avatar picture
+dataURI: false
+## if the picture's format is dataURI please set the value to true,otherwise set the value to false.
+## convert an image into base 64 data URIs http://websemantics.co.uk/online_tools/image_to_data_uri_convertor/ .
+author_img_data: 
+## paste the dataURI in ONE LINE and included it by ''.
+author_img: img/author.png ## size:220px*220px.
+## if the picture's format is `.png` or `.jpg`  instead of dataURI,you should set the `dataURI` value to false.
+
+#### Font
+ShowCustomFont: true  
+## you can change custom font in `variable.styl` and `font.styl` which in the theme folder `/jacman/source/css`.
+
+#### Toc
+toc:
+  article: true   ## show contents in article.
+  aside: false     ## show contents in aside.
+## you can set both of the value to true of neither of them.
+## if you don't want display contents in a specified post,you can modify `front-matter` and add `toc: false`.
+
+#### Fancybox
+fancybox: true 
+## if you use gallery post or want use fancybox please set the value to true.
+## if you want use fancybox in ANY post please copy the file `fancybox.js`.
+## in theme folder `/jacman/scripts` to your hexo blog folder `../scritps`.
+
+### Scroll to top
+totop: true
+##if you want to scroll to top in every post set the value to true
+
+#### Author information
+author:
+  google_plus: ##111190881341800841449    ## eg:116338260303228776998 for https://plus.google.com/u/0/116338260303228776998
+  intro_line1: "I'm TZ, work for UCWeb as a front-end-developer now." ## eg: "Hello ,I'm Larry Page in Google."
+  intro_line2: "I'll share my learning experience with you at this blog." ## eg: "This is my blog,believe it or not."
+  weibo: liuyong25     ## e.g. 436062867 for http://weibo.com/436062867
+  twitter:    ## e.g. yangjiansky for https://twitter.com/yangjiansky
+  github: atian25    ## e.g. A-limon for https://github.com/A-limon
+  facebook:   ## e.g. yangjian for https://favebook.com/yangjian
+  stackoverflow:  537353   ##e.g. 3222790 for http://stackoverflow.com/users/3222790/jark
+  douban: ##wuchong1014    ##e.g. wuchong1014 or your id for https://www.douban.com/people/wuchong1014
+  tsina: 1835555361     ## e.g. 1664838973  Your weibo ID,It will be used in share button.
+  email: #wuchong1014@gmail.com    ##email
+
+#### Comment
+duoshuo: 
+  enable: true  ## duoshuo.com
+  short_name: atian25   ## duoshuo short name.
+
+#### Share button
+jiathis:
+  enable: true ## if you use jiathis as your share tool,the built-in share tool won't be display.
+  id: 1394180256742186   ## e.g. 1501277 your jiathis ID. 
+  tsina: 1835555361 ## e.g. 1664838973 Your weibo id,It will be used in share button.
+
+#### Custom Search
+google_cse: 
+  enable: false
+  cx: 018294693190868310296:abnhpuysycw ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
+## https://www.google.com/cse/
+  
+  
+#### Analytics
+google_analytics:
+  enable: true
+  id:   UA-636652-4  ## e.g. UA-46321946-2 your google analytics ID.
+  site: atian25.github.io     ## e.g. wuchong.me your google analytics site or set the value as auto.
+## You MUST upgrade to Universal Analytics first!
+## https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN
+

@@ -1,0 +1,14 @@
+<section class="<%= item.layout %>" itemscope itemprop="blogPost">
+  <% if (item.link) { %> 
+    <a href="<%- item.link %>" target="_blank"> 
+  <% } else{ %>
+    <a href="<%- config.root %><%- item.path %>" title="<%= item.title %>" itemprop="url">
+  <% } %>
+
+    <time datetime="<%= date_xml(item.date) %>" itemprop="datePublished"><%= item.date.format(config.date_format) %></time>
+
+
+    <h1 itemprop="name"><%= item.title %></h1>
+
+  </a>
+</section>
