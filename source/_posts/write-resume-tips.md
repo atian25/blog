@@ -1,7 +1,7 @@
 title: 写简历的技巧
 date: 2013-11-29 14:30:16
 categories:
-  - 职场
+  - work
 tags:
   - 职场
   - 简历
