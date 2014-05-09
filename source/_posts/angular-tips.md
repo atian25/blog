@@ -8,6 +8,7 @@ tags:
 ---
 
 ### 通过Chrome控制台获取service
+<!-- more -->
 ```
 //先获取element
 //var element = angular.element(document.body);  

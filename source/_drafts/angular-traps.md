@@ -8,3 +8,5 @@ tags:
 
 ngModel
 ngRoute Android bug
+
+### filter的结果不能随机
