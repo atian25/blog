@@ -90,9 +90,9 @@ $http.get('http://path/to/url').success(function(data){
 ```
 - `$evalAsync` vs `$timeout`
   - http://stackoverflow.com/questions/17301572/angularjs-evalasync-vs-timeout
-  - if code is queued using $evalAsync from a directive, it should run after the DOM has been manipulated by Angular, but before the browser renders
-  - if code is queued using $evalAsync from a controller, it should run before the DOM has been manipulated by Angular (and before the browser renders) -- rarely do you want this
-  - if code is queued using $timeout, it should run after the DOM has been manipulated by Angular, and after the browser renders (which may cause flicker in some cases)
+  - directive中执行的`$evalAsync`， 会在angular操作DOM之后，浏览器渲染之前执行。
+  - controller中执行的`$evalAsync`， 会在angular操作DOM之前执行，一般不这么用。
+  - 而使用`$timeout`，会在浏览器渲染之后执行。
 
 ## 优化ng-repeat
 ### 限制列表个数
