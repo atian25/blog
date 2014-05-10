@@ -7,8 +7,10 @@ tags:
   - javascript
 ---
 
-### 通过Chrome控制台获取service
+介绍一些关于angular的小技巧
 <!-- more -->
+
+### 通过Chrome控制台获取service
 ```
 //先获取element
 //var element = angular.element(document.body);  

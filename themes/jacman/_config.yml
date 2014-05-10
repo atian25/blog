@@ -46,7 +46,7 @@ ShowCustomFont: true
 #### Toc
 toc:
   article: true   ## show contents in article.
-  aside: false     ## show contents in aside.
+  aside: true     ## show contents in aside.
 ## you can set both of the value to true of neither of them.
 ## if you don't want display contents in a specified post,you can modify `front-matter` and add `toc: false`.
 
@@ -88,7 +88,7 @@ jiathis:
 #### Custom Search
 google_cse: 
   enable: false
-  cx: 018294693190868310296:abnhpuysycw ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
+  cx: 007309141952219334833:xwhzyjecwiy ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
 ## https://www.google.com/cse/
   
   
