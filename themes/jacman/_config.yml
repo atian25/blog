@@ -2,7 +2,8 @@
 menu:
   首页: /
   归档: /archives
-  关于: /about
+  关于: http://atian25.github.io/2014/05/10/job-ucweb/
+  ##关于: /about
 ## you can create `tags` and `categories` folders in `../source`.
 ## And create a `index.md` file in each of them.
 ## set `front-matter`as

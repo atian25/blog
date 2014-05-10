@@ -3,5 +3,6 @@
   "version": "2.5.6",
   "private": true,
   "dependencies": {
+    "hexo-generator-alias": "^0.1.0"
   }
 }
