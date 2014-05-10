@@ -24,6 +24,8 @@ date: 2014-05-09 18:14:25
 - Timer事件(`$timeout`, `$interval`)
 - 执行`$digest()`或`$apply()`
 
+![](/images/concepts-runtime.png)
+
 > 参考《mastering web application development with angularjs》 P294
 
 ## $digest后批量更新UI
@@ -59,9 +61,10 @@ var unwatch = $scope.$watch("someKey", function(newValue, oldValue){
 > 参考《mastering web application development with angularjs》 P313
 
 - 减少watch的变量长度
-如下，angular不会仅对`{{variable}}`建立watcher，而是对整个p标签。
+如下，angular不会仅对{% raw %}`{{variable}}`{% endraw %}建立watcher，而是对整个p标签。
 **双括号应该被span包裹，因为watch的是外部element**
 > 参考《mastering web application development with angularjs》 P314
+{% raw %}
 ```
 <p>plain text other {{variable}} plain text other</p>
 //改为:
@@ -69,6 +72,7 @@ var unwatch = $scope.$watch("someKey", function(newValue, oldValue){
 //或
 <p>plain text other <span>{{variable}}</span> plain text other</p>
 ```
+{% endraw %}
 
 ### $apply vs $digest
 - $apply会使ng进入`$digest cycle`, 并从$rootScope开始遍历(深度优先)检查数据变更。
@@ -106,8 +110,9 @@ $http.get('http://path/to/url').success(function(data){
 
 ## 使用bindonce减少绑定
 我们都知道angular建议一个页面最多2000个双向绑定，但在列表页面通常很容易超标。
-譬如一个滑动到底部加载下页的表格，一行20+个绑定, 暂时个100行就超标了。
-![](/images/scope-binding.png)
+譬如一个滑动到底部加载下页的表格，一行20+个绑定, 展示个100行就超标了。
+下图这个只是一个很简单的列表，还不是表格，就已经这么多个了：
+![](/images/scope-binding-src.png)
 但其实很多属性显示后是几乎不会变更的， 这时候就没必要双向绑定了。（不知道angular为何不考虑此类场景）
 如下图，改为[bindonce](https://github.com/pasvaz/bindonce)或[angular-once](https://github.com/tadeuszwojcik/angular-once)后减少了很多：
 ![](/images/scope-binding-once.png)
@@ -118,11 +123,11 @@ $http.get('http://path/to/url').success(function(data){
 > 参考《mastering web application development with angularjs》 P136
 
 ```
-angular.module('filtersPerf', []).filter('logUppercase', function(uppercaseFilter){
+angular.module('filtersPerf', []).filter('double', function(){
   return function(input) {
     //至少输出两次
-    console.log('Calling uppercase on: '+input);
-    return uppercaseFilter(input);
+    console.log('Calling double on: '+input);
+    return input + input;
   };
 });
 ```
@@ -131,7 +136,7 @@ angular.module('filtersPerf', []).filter('logUppercase', function(uppercaseFilte
 ```
 //mainCtrl.js
 angular.module('filtersPerf', []).controller('mainCtrl', function($scope, $filter){
-  $scope.dataList = $filter('logUppercase')(dataFromServer);
+  $scope.dataList = $filter('double')(dataFromServer);
 });
 ```
 
@@ -146,7 +151,9 @@ angular.module('filtersPerf', []).controller('mainCtrl', function($scope, $filte
 ## directive
 - **跟scope数据无关的操作放在compile阶段，它只执行一次。**
 - 除了directive外其他地方，特别是controller里面不要操作dom， 尤其是绑定到scope后，便是灾难。
-- 改变以前使用JQuery那样`以DOM为中心`的思维，拥抱`以数据为中心`的思维。
+- 改变以前使用JQuery那样`以DOM为中心`的思维，拥抱`以数据为中心`的思维。参见
+> 参见: http://stackoverflow.com/questions/14994391/how-do-i-think-in-angularjs-if-i-have-a-jquery-background
+> 翻译: http://blog.jobbole.com/46589/
 
 ## 使用Batarang来分析性能
 - [AngularJS Batarang](https://chrome.google.com/webstore/detail/ighdmehidhipcmcojjgiloacoafjmpfk)是官方提供的chrome插件

@@ -1,11 +1,11 @@
 title: 选择困难症又犯了，哪里开blog呢？
+date: 2014-05-08
 categories:
   - life
 tags:
 ---
 **选择困难症又开始了。。。**
-
-
+<!-- more -->
 再读读浩哥的: [程序算法与人生选择](http://coolshell.cn/articles/8790.html)
 
 ## 1. 知乎专栏
