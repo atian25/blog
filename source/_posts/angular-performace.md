@@ -108,7 +108,7 @@ $http.get('http://path/to/url').success(function(data){
 若优化为`ng-repeat="task in tasks track by task.id`后，angular就能复用task对应的原DOM进行更新，减少不必要渲染。
 参见：http://www.codelord.net/2014/04/15/improving-ng-repeat-performance-with-track-by
 
-## 使用bindonce减少绑定
+## 使用单次绑定
 我们都知道angular建议一个页面最多2000个双向绑定，但在列表页面通常很容易超标。
 譬如一个滑动到底部加载下页的表格，一行20+个绑定, 展示个100行就超标了。
 下图这个只是一个很简单的列表，还不是表格，就已经这么多个了：
@@ -116,6 +116,12 @@ $http.get('http://path/to/url').success(function(data){
 但其实很多属性显示后是几乎不会变更的， 这时候就没必要双向绑定了。（不知道angular为何不考虑此类场景）
 如下图，改为[bindonce](https://github.com/pasvaz/bindonce)或[angular-once](https://github.com/tadeuszwojcik/angular-once)后减少了很多：
 ![](/images/scope-binding-once.png)
+
+**update：**
+1.3.0b10开始支持内建单次绑定, {% raw %}`{{::variable}}`{% endraw %}
+设计文档:http://t.cn/RvIYHp9 
+commit: http://t.cn/RvIYHpC
+目前该特性的性能似乎还有待优化(2x slower)
 
 ## 慎用filter
 在$digest过程中，filter会执行很多次，至少两次。
