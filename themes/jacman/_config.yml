@@ -63,8 +63,8 @@ totop: true   ##show scroll-to-top in article
 
 #### Author information
 author:
-  intro_line1:  "天猪TZ，来自UC的一枚前端工程师"  ## eg: "Hello ,I'm Larry Page in Google."
-  intro_line2:  ""  ## eg: "This is my blog,believe it or not."
+  intro_line1: "I'm TZ, work for UCWeb as a front-end-developer now." ## eg: "Hello ,I'm Larry Page in Google."
+  intro_line2: "I'll share my learning experience with you at this blog." ## eg: "This is my blog,believe it or not."
   weibo:      liuyong25 ## e.g. wuchong1014 or 2176287895 for http://weibo.com/2176287895
   twitter:    ## e.g. wuchong for https://twitter.com/wuchong
   github:     atian25 ## e.g. wuchong for https://github.com/wuchong
