@@ -6,7 +6,9 @@ tags: angular
 上周六在[「前端圈-走进UC专场」](http://fequan.com/uc)的分享的主题
 
 <!-- more -->
-下载地址：[AngularJS进阶实践](/files/AngularJS 进阶实践.pptx)
+---
+
+#### 下载地址：[AngularJS进阶实践.pptx](/files/AngularJS 进阶实践.pptx)
 
 ---
 
