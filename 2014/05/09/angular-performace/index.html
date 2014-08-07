@@ -1,0 +1,533 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>angular性能优化心得 | 天猪部落阁</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="TZ">
+    
+    <meta name="description" content="不知不觉，在项目中用angular已经半年多了，踩了很多坑。趁着放假，把angular的3本书都看了遍，结合这半年的经验，是该做个总结了。希望可以给大家带来启示，少踩点坑。">
+    
+    
+    
+    
+    <link rel="alternative" href="/atom.xml" title="天猪部落阁" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.png">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="天猪部落阁" title="天猪部落阁"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="天猪部落阁">天猪部落阁</a></h1>
+				<h2 class="blog-motto">追求卓越，成功就会在不经意间追上你。</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="Menu">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">首页</a></li>
+					
+						<li><a href="/archives">归档</a></li>
+					
+						<li><a href="http://atian25.github.io/2014/05/10/job-ucweb/">关于</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="Search" />
+						<input type="hidden" name="q" value="site:atian25.github.io">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2014/05/09/angular-performace/" title="angular性能优化心得" itemprop="url">angular性能优化心得</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="http://atian25.github.io/about" title="TZ" target="_blank" itemprop="author">TZ</a>
+		
+  <p class="article-time">
+    <time datetime="2014-05-09T10:14:25.000Z" itemprop="datePublished"> Published 2014-05-09</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">Contents</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#脏数据检查_!=_轮询检查更新"><span class="toc-number">1.</span> <span class="toc-text">脏数据检查 != 轮询检查更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#$digest后批量更新UI"><span class="toc-number">2.</span> <span class="toc-text">$digest后批量更新UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提速_$digest_cycle"><span class="toc-number">3.</span> <span class="toc-text">提速 $digest cycle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关键点"><span class="toc-number">3.1.</span> <span class="toc-text">关键点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化$watch"><span class="toc-number">3.2.</span> <span class="toc-text">优化$watch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#$apply_vs_$digest"><span class="toc-number">3.3.</span> <span class="toc-text">$apply vs $digest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#延迟执行"><span class="toc-number">3.4.</span> <span class="toc-text">延迟执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化ng-repeat"><span class="toc-number">4.</span> <span class="toc-text">优化ng-repeat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限制列表个数"><span class="toc-number">4.1.</span> <span class="toc-text">限制列表个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用_track_by"><span class="toc-number">4.2.</span> <span class="toc-text">使用 track by</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用单次绑定"><span class="toc-number">5.</span> <span class="toc-text">使用单次绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慎用filter"><span class="toc-number">6.</span> <span class="toc-text">慎用filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慎用事件"><span class="toc-number">7.</span> <span class="toc-text">慎用事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#directive"><span class="toc-number">8.</span> <span class="toc-text">directive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Batarang来分析性能"><span class="toc-number">9.</span> <span class="toc-text">使用Batarang来分析性能</span></a></li></ol>
+		
+		</div>
+		
+		<blockquote>
+<p>不知不觉，在项目中用angular已经半年多了，踩了很多坑。<br>趁着放假，把angular的3本书都看了遍，结合这半年的经验，是该做个总结了。<br>希望可以给大家带来启示，少踩点坑。<br><a id="more"></a><br>本文针对的读者：</p>
+<ul>
+<li>具备JavaScript性能优化的相关知识（<code>雅虎14条性能优化原则</code>、<code>《高性能网站建设指南》</code>等）</li>
+<li>拥有angular实战经验。</li>
+</ul>
+</blockquote>
+<h2 id="脏数据检查_!=_轮询检查更新">脏数据检查 != 轮询检查更新</h2>
+<p>谈起angular的<code>脏检查机制(dirty-checking)</code>, 常见的误解就是认为： ng是定时轮询去检查model是否变更。<br>其实，ng只有在指定事件触发后，才进入<code>$digest cycle</code>： </p>
+<ul>
+<li>DOM事件，譬如用户输入文本，点击按钮等。(<code>ng-click</code>)</li>
+<li>XHR响应事件 (<code>$http</code>)</li>
+<li>浏览器Location变更事件 (<code>$location</code>)</li>
+<li>Timer事件(<code>$timeout</code>, <code>$interval</code>)</li>
+<li>执行<code>$digest()</code>或<code>$apply()</code></li>
+</ul>
+<p><img src="/images/concepts-runtime.png" alt=""></p>
+<blockquote>
+<p>参考《mastering web application development with angularjs》 P294</p>
+</blockquote>
+<h2 id="$digest后批量更新UI">$digest后批量更新UI</h2>
+<p>传统的JS MVC框架, 数据变更是通过setter去触发事件，然后立即更新UI。<br>而angular则是进入<code>$digest cycle</code>，等待所有model都稳定后，才批量一次性更新UI。<br>这种机制能减少浏览器repaint次数，从而提高性能。</p>
+<blockquote>
+<p>参考《mastering web application development with angularjs》 P296<br>另, 推荐阅读: <a href="http://angularjs.cn/A0lr" target="_blank" rel="external">构建自己的AngularJS，第一部分：Scope和Digest</a></p>
+</blockquote>
+<h2 id="提速_$digest_cycle">提速 $digest cycle</h2>
+<h3 id="关键点">关键点</h3>
+<ul>
+<li><strong>尽少的触发$digest</strong> (P310)</li>
+<li><strong>尽快的执行$digest</strong></li>
+</ul>
+<h3 id="优化$watch">优化$watch</h3>
+<ul>
+<li><code>$scope.$watch(watchExpression, modelChangeCallback)</code>, watchExpression可以是String或Function。</li>
+<li><strong>避免watchExpression中执行耗时操作</strong>，因为它在每次$digest都会执行1~2次。</li>
+<li>避免watchExpression中操作dom，因为它很耗时。</li>
+<li><code>console.log</code>也很耗时，记得发布时干掉它。（用grunt groundskeeper）</li>
+<li><code>ng-if vs ng-show</code>， 前者会移除DOM和对应的watch</li>
+<li><strong>及时移除不必要的$watch。</strong>（angular自动生成的可以通过下文介绍的<code>bindonce</code>）<blockquote>
+<p>参考《mastering web application development with angularjs》 P303~309</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> unwatch = <span class="variable">$scope</span>.<span class="variable">$watch</span>(<span class="string">"someKey"</span>, <span class="function"><span class="keyword">function</span><span class="params">(newValue, oldValue)</span></span>{</div><div class="line">  <span class="comment">//do sth...</span></div><div class="line">  <span class="keyword">if</span>(someCondition){</div><div class="line">    <span class="comment">//当不需要的时候,及时移除watch</span></div><div class="line">    unwatch();</div><div class="line">  }</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<ul>
+<li><p>避免深度watch， 即第三个参数为true</p>
+<blockquote>
+<p>参考《mastering web application development with angularjs》 P313</p>
+</blockquote>
+</li>
+<li><p>减少watch的变量长度<br>如下，angular不会仅对<code>{{variable}}</code>建立watcher，而是对整个p标签。<br><strong>双括号应该被span包裹，因为watch的是外部element</strong></p>
+<blockquote>
+<p>参考《mastering web application development with angularjs》 P314</p>
+</blockquote>
+</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="title">p</span>&gt;</span>plain text other </span><span class="expression">{{<span class="variable">variable</span>}}</span><span class="xml"> plain text other<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span></div><div class="line">//改为:</div><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>plain text other <span class="tag">&lt;<span class="title">span</span> <span class="attribute">ng-bind</span>=<span class="value">'variable'</span>&gt;</span><span class="tag">&lt;/<span class="title">span</span>&gt;</span> plain text other<span class="tag">&lt;/<span class="title">p</span>&gt;</span></div><div class="line">//或</div><div class="line"><span class="tag">&lt;<span class="title">p</span>&gt;</span>plain text other <span class="tag">&lt;<span class="title">span</span>&gt;</span><span class="expression">{{<span class="variable">variable</span>}}</span><span class="xml"><span class="tag">&lt;/<span class="title">span</span>&gt;</span> plain text other<span class="tag">&lt;/<span class="title">p</span>&gt;</span></span></div></pre></td></tr></table></figure>
+
+<h3 id="$apply_vs_$digest">$apply vs $digest</h3>
+<ul>
+<li>$apply会使ng进入<code>$digest cycle</code>, 并从$rootScope开始遍历(深度优先)检查数据变更。</li>
+<li>$digest仅会检查该scope和它的子scope，当你确定当前操作仅影响它们时，用$digest可以稍微提升性能。<blockquote>
+<p>参考《mastering web application development with angularjs》 P308</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="延迟执行">延迟执行</h3>
+<ul>
+<li>一些不必要的操作，放到<code>$timeout</code>里面延迟执行。</li>
+<li>如果不涉及数据变更，还可以加上第三个参数false，避免调用<code>$apply</code>。</li>
+<li>对时间有要求的，第二个参数可以设置为0。</li>
+</ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="variable">$http</span>.get(<span class="string">'http://path/to/url'</span>).success(<span class="function"><span class="keyword">function</span><span class="params">(data)</span></span>{</div><div class="line">  <span class="variable">$scope</span>.name = data.name;</div><div class="line">  <span class="variable">$timeout</span>(<span class="function"><span class="keyword">function</span><span class="params">()</span></span>{</div><div class="line">    <span class="comment">//do sth later, such as log</span></div><div class="line">  }, <span class="number">0</span>, <span class="keyword">false</span>);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<ul>
+<li><code>$evalAsync</code> vs <code>$timeout</code><ul>
+<li><a href="http://stackoverflow.com/questions/17301572/angularjs-evalasync-vs-timeout" target="_blank" rel="external">http://stackoverflow.com/questions/17301572/angularjs-evalasync-vs-timeout</a></li>
+<li>directive中执行的<code>$evalAsync</code>， 会在angular操作DOM之后，浏览器渲染之前执行。</li>
+<li>controller中执行的<code>$evalAsync</code>， 会在angular操作DOM之前执行，一般不这么用。</li>
+<li>而使用<code>$timeout</code>，会在浏览器渲染之后执行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="优化ng-repeat">优化ng-repeat</h2>
+<h3 id="限制列表个数">限制列表个数</h3>
+<ul>
+<li>列表对象的数据转换，在放入scope之前处理。如<code>$scope.dataList = convert(dataFromServer)</code></li>
+<li>可以使用<a href="http://binarymuse.github.io/ngInfiniteScroll/" target="_blank" rel="external">ngInfiniteScroll</a>来做无限滚动。</li>
+</ul>
+<h3 id="使用_track_by">使用 track by</h3>
+<p>刷新数据时，我们常这么做：<code>$scope.tasks = data || [];</code>，这会导致angular移除掉所有的DOM，重新创建和渲染。<br>若优化为<code>ng-repeat=&quot;task in tasks track by task.id</code>后，angular就能复用task对应的原DOM进行更新，减少不必要渲染。<br>参见：<a href="http://www.codelord.net/2014/04/15/improving-ng-repeat-performance-with-track-by" target="_blank" rel="external">http://www.codelord.net/2014/04/15/improving-ng-repeat-performance-with-track-by</a></p>
+<h2 id="使用单次绑定">使用单次绑定</h2>
+<p>我们都知道angular建议一个页面最多2000个双向绑定，但在列表页面通常很容易超标。<br>譬如一个滑动到底部加载下页的表格，一行20+个绑定, 展示个100行就超标了。<br>下图这个只是一个很简单的列表，还不是表格，就已经这么多个了：<br><img src="/images/scope-binding-src.png" alt=""><br>但其实很多属性显示后是几乎不会变更的， 这时候就没必要双向绑定了。（不知道angular为何不考虑此类场景）<br>如下图，改为<a href="https://github.com/pasvaz/bindonce" target="_blank" rel="external">bindonce</a>或<a href="https://github.com/tadeuszwojcik/angular-once" target="_blank" rel="external">angular-once</a>后减少了很多：<br><img src="/images/scope-binding-once.png" alt=""></p>
+<p><strong>update：</strong><br>1.3.0b10开始支持内建单次绑定, <code>{{::variable}}</code><br>设计文档:<a href="http://t.cn/RvIYHp9" target="_blank" rel="external">http://t.cn/RvIYHp9</a><br>commit: <a href="http://t.cn/RvIYHpC" target="_blank" rel="external">http://t.cn/RvIYHpC</a><br>目前该特性的性能似乎还有待优化(2x slower)</p>
+<h2 id="慎用filter">慎用filter</h2>
+<p>在$digest过程中，filter会执行很多次，至少两次。<br>所以要<strong>避免在filter中执行耗时操作</strong>。</p>
+<blockquote>
+<p>参考《mastering web application development with angularjs》 P136</p>
+</blockquote>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">angular.module(<span class="string">'filtersPerf'</span>, []).<span class="built_in">filter</span>(<span class="string">'double'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span>{</span></div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span><span class="params">(input)</span> {</span></div><div class="line">    //至少输出两次</div><div class="line">    console.<span class="built_in">log</span>(<span class="string">'Calling double on: '</span>+<span class="built_in">input</span>);</div><div class="line">    <span class="keyword">return</span> <span class="built_in">input</span> + <span class="built_in">input</span>;</div><div class="line">  };</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<p>可以在controller中预先处理</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//mainCtrl.js</span></div><div class="line">angular.module(<span class="string">'filtersPerf'</span>, []).controller(<span class="string">'mainCtrl'</span>, <span class="function"><span class="keyword">function</span><span class="params">(<span class="variable">$scope</span>, <span class="variable">$filter</span>)</span></span>{</div><div class="line">  <span class="variable">$scope</span>.dataList = <span class="variable">$filter</span>(<span class="string">'double'</span>)(dataFromServer);</div><div class="line">});</div></pre></td></tr></table></figure>
+
+<h2 id="慎用事件">慎用事件</h2>
+<ul>
+<li>减少事件广播，使用双向数据绑定或共享service等方法来代替。</li>
+<li><code>$broadcast</code>会遍历scope和它的子scope，而不是只通知注册了该事件的子scope。</li>
+<li>一个优化方式是使用<code>$emit</code>, 参见<a href="https://github.com/angular/angular.js/issues/4574" target="_blank" rel="external">https://github.com/angular/angular.js/issues/4574</a></li>
+<li>1.2.7版本对事件做过一个优化，参见<a href="https://github.com/angular/angular.js/blob/master/CHANGELOG.md#127-emoji-clairvoyance-2014-01-03" target="_blank" rel="external">https://github.com/angular/angular.js/blob/master/CHANGELOG.md#127-emoji-clairvoyance-2014-01-03</a></li>
+<li>对高频的事件做缓冲限速，避免触发太频繁。</li>
+</ul>
+<h2 id="directive">directive</h2>
+<ul>
+<li><strong>跟scope数据无关的操作放在compile阶段，它只执行一次。</strong></li>
+<li>除了directive外其他地方，特别是controller里面不要操作dom， 尤其是绑定到scope后，便是灾难。</li>
+<li>改变以前使用JQuery那样<code>以DOM为中心</code>的思维，拥抱<code>以数据为中心</code>的思维。参见<blockquote>
+<p>参见: <a href="http://stackoverflow.com/questions/14994391/how-do-i-think-in-angularjs-if-i-have-a-jquery-background" target="_blank" rel="external">http://stackoverflow.com/questions/14994391/how-do-i-think-in-angularjs-if-i-have-a-jquery-background</a><br>翻译: <a href="http://blog.jobbole.com/46589/" target="_blank" rel="external">http://blog.jobbole.com/46589/</a></p>
+</blockquote>
+</li>
+</ul>
+<h2 id="使用Batarang来分析性能">使用Batarang来分析性能</h2>
+<ul>
+<li><a href="https://chrome.google.com/webstore/detail/ighdmehidhipcmcojjgiloacoafjmpfk" target="_blank" rel="external">AngularJS Batarang</a>是官方提供的chrome插件<br><img src="/images/angular-batarang.png" alt=""></li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/angular/">angular</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/angular/">angular</a><a href="/tags/javascript/">javascript</a>
+  </div>
+
+</div>
+
+
+<div class="article-share" id="share">
+
+<div class="share-jiathis">
+  
+<div class="jiathis_style_24x24">
+	<a class="jiathis_button_tsina"></a>
+	<a class="jiathis_button_weixin"></a>
+	<a class="jiathis_button_renren"></a>
+	<a class="jiathis_button_qzone"></a>
+	<a class="jiathis_button_googleplus"></a>
+	<a class="jiathis_button_douban"></a>
+	<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript" >
+    var jiathis_config={
+    data_track_clickback:true,
+    sm:"copy,renren,cqq",
+    pic:"",
+    summary:"",
+     ralateuid:{"tsina":"1835555361"},hideMore:false}
+    
+  </script> 
+<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=
+1394180256742186" charset="utf-8"></script>      
+
+ </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/2014/05/10/job-ucweb/" title="如何加入UC优视">
+  <strong>上一篇：</strong><br/>
+  <span>
+  如何加入UC优视</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/2014/05/08/choose-blog/"  title="选择困难症又犯了，哪里开blog呢？">
+ <strong>下一篇：</strong><br/> 
+ <span>选择困难症又犯了，哪里开blog呢？
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="Show Sidebar"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">Contents</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#脏数据检查_!=_轮询检查更新"><span class="toc-number">1.</span> <span class="toc-text">脏数据检查 != 轮询检查更新</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#$digest后批量更新UI"><span class="toc-number">2.</span> <span class="toc-text">$digest后批量更新UI</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#提速_$digest_cycle"><span class="toc-number">3.</span> <span class="toc-text">提速 $digest cycle</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#关键点"><span class="toc-number">3.1.</span> <span class="toc-text">关键点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优化$watch"><span class="toc-number">3.2.</span> <span class="toc-text">优化$watch</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#$apply_vs_$digest"><span class="toc-number">3.3.</span> <span class="toc-text">$apply vs $digest</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#延迟执行"><span class="toc-number">3.4.</span> <span class="toc-text">延迟执行</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化ng-repeat"><span class="toc-number">4.</span> <span class="toc-text">优化ng-repeat</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#限制列表个数"><span class="toc-number">4.1.</span> <span class="toc-text">限制列表个数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用_track_by"><span class="toc-number">4.2.</span> <span class="toc-text">使用 track by</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用单次绑定"><span class="toc-number">5.</span> <span class="toc-text">使用单次绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慎用filter"><span class="toc-number">6.</span> <span class="toc-text">慎用filter</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#慎用事件"><span class="toc-number">7.</span> <span class="toc-text">慎用事件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#directive"><span class="toc-number">8.</span> <span class="toc-text">directive</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用Batarang来分析性能"><span class="toc-number">9.</span> <span class="toc-text">使用Batarang来分析性能</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="Hide Sidebar"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">Categories</p>
+		<ul>
+		
+			<li><a href="/categories/angular/" title="angular">angular<sup>2</sup></a></li>
+		
+			<li><a href="/categories/life/" title="life">life<sup>1</sup></a></li>
+		
+			<li><a href="/categories/work/" title="work">work<sup>2</sup></a></li>
+		
+			<li><a href="/categories/前端工程化/" title="前端工程化">前端工程化<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">Tags</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/javascript/" title="javascript">javascript<sup>3</sup></a></li>
+		
+			<li><a href="/tags/angular/" title="angular">angular<sup>3</sup></a></li>
+		
+			<li><a href="/tags/简历/" title="简历">简历<sup>2</sup></a></li>
+		
+			<li><a href="/tags/职场/" title="职场">职场<sup>2</sup></a></li>
+		
+			<li><a href="/tags/grunt/" title="grunt">grunt<sup>1</sup></a></li>
+		
+			<li><a href="/tags/UCWeb/" title="UCWeb">UCWeb<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">About Me</p>
+  <ul>
+    <li><a href="https://github.com/atian25" target="_blank">我的Github</a></li>
+    <li><a href="http://www.zhihu.com/people/liuyong25" target="_blank">我的知乎</a></li>
+    <li><a href="http://atian25.github.io/2014/05/10/job-ucweb/" target="_blank">加入UC优视</a></li>
+  </ul>
+</div>
+<div class="linkslist">
+  <p class="asidetitle">Links - JS</p>
+  <ul>
+    <li><a href="http://dailyjs.com/" target="_blank">DailyJS</a></li>
+    <li><a href="http://www.75team.com/weekly/" target="_blank">奇舞周刊</a></li>
+    <li><a href="https://github.com/fouber/blog" target="_blank" title="前端工程化 - 干货">张云龙</a></li>
+  </ul>
+</div>
+<div class="linkslist">
+  <p class="asidetitle">Links - Angular</p>
+  <ul>
+    <li><a href="http://angular-tips.com/" target="_blank">angular-tips</a></li>
+    <li><a href="http://angularjs.cn/" target="_blank">AngularJS中文社区</a></li>
+    <li><a href="http://www.cnblogs.com/whitewolf/" target="_blank">破狼的Blog</a></li>
+  </ul>
+</div>
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font" class="clearfix">
+		
+		<a href="http://weibo.com/liuyong25" target="_blank" class="icon-weibo" title="weibo"></a>
+		
+		
+		<a href="https://github.com/atian25" target="_blank" class="icon-github" title="github"></a>
+		
+		
+		<a href="http://stackoverflow.com/users/537353" target="_blank" class="icon-stack-overflow" title="stackoverflow"></a>
+		
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://zespia.tw/hexo/" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Pacman">Jacman</a> © 2014 
+		
+		<a href="http://atian25.github.io/about" target="_blank" title="TZ">TZ</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+
+
+<div id="totop">
+<a title="Back to Top"><img src="/img/scrollup.png"/></a>
+</div>
+
+<script src="/js/totop.js"></script>
+
+
+
+
+  </body>
+</html>
