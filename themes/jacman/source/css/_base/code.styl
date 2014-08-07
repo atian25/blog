@@ -21,16 +21,19 @@ $code-block
   padding 0.5em 2%
   color highlight-foreground
   line-height line-height
-  font-size 0.1em
+  font-size 0.8em
   -webkit-border-radius 0.35em
   border-radius 0.35em
+  word-wrap break-word
   @media phone
     font-size 0.95em
 
 $line-numbers
   color highlight-line-numbers 
-  font-size 0.95em
-  line-height line-height
+  font-size 0.4em
+  @media phone
+    font-size 0.95em
+    line-height line-height
 
 .article-content   
   pre
@@ -46,6 +49,9 @@ $line-numbers
   .highlight
     @extend $code-block
     overflow auto
+    font-size 0.4em
+    @media phone
+      font-size 0.95em
     pre
       @extend $code-block
       border none

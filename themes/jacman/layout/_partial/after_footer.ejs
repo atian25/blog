@@ -85,14 +85,15 @@ $(document).ready(function(){
       url = $this.attr('data-url'),
       encodedUrl = encodeURIComponent(url),
       title = $this.attr('data-title'),
-      tsina = $this.attr('data-tsina');
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
   var html = [
   '<a href="#" class="overlay" id="qrcode"></a>',
   '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
-  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
   '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
-  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
   '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
   '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
   '<span title="Share to"></span>'
   ].join('');
@@ -107,7 +108,8 @@ $(document).ready(function(){
 });     
 </script>
 <% } %>
-<% if ((page.layout=='post'||page.layout=='page')&&theme.duoshuo.enable && page.comments){ %>
+<% if (page.layout=='post'||page.layout=='page'){ %>
+<% if (theme.duoshuo.enable && page.comments){ %>
 <script type="text/javascript">
   var duoshuoQuery = {short_name:"<%= theme.duoshuo.short_name %>"};
   (function() {
@@ -120,6 +122,25 @@ $(document).ready(function(){
   })();
 </script> 
 <% } %>
+<% if( (config.disqus_shortname || theme.disqus.enable) && page.comments) { %>
+<script type="text/javascript">
+<% if(config.disqus_shortname){ %>
+var disqus_shortname = '<%= config.disqus_shortname %>';
+<% }else{ %>
+var disqus_shortname = '<%= theme.disqus.short_name %>';
+<% } %>
+(function(){
+  var dsq = document.createElement('script');
+  dsq.type = 'text/javascript';
+  dsq.async = true;
+  dsq.src = '//' + disqus_shortname + '.disqus.com/<% if (page.comments){ %>embed.js<% } else { %>count.js<% } %>';
+  (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+}());
+</script>
+<% } %>
+<% } %>
+
+
 <% if (page.layout=='tags'||page.layout=='categories'){ %>
 <script type="text/javascript">
 $(document).ready(function(){ 
@@ -161,19 +182,16 @@ $(document).ready(function(){
 }); 
 </script>
 <% } %>
+
+<% if (theme.google_analytics.enable){ %>
 <%- partial('google_analytics') %>
-<% if ((page.layout=='post'||page.layout=='page')&&theme.fancybox){ %>
+<% } %>
+
+<% if (theme.totop){ %>
 <%- partial('totop') %>
 <script src="<%- config.root %>js/totop.js"></script>
 <% } %>
 
-<% /*
-<script type="text/x-mathjax-config"> 
-MathJax.Hub.Config({ 
-  tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]} 
-}); 
-</script>
-<script type="text/javascript"
-   src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-*/ %> 
+<% if (page.mathjax){ %>
+<%- partial('mathjax') %>
+<% } %>

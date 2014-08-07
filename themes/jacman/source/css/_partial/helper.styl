@@ -6,8 +6,6 @@ footer.article-footer
   
 //share
 .article-share
-  padding 0.5em 0
-  margin-top 0.3em
   float right
   width 100%
   @media phone
@@ -15,7 +13,10 @@ footer.article-footer
   @media mini
     width 16.5em
 
-  
+.article-share .share-jiathis
+  padding 0.5em 0
+  margin-top 0.3em
+
 .share 
   span
     float right
@@ -74,6 +75,14 @@ footer.article-footer
     background color-qrcode
     text-shadow 0 1px darken(color-qrcode, 20%)
 
+.article-share-renren
+  &:before
+    content "\f18b"
+  &:hover
+    background color-renren
+    text-shadow 0 1px darken(color-renren, 20%)
+
+
 .article-back-to-top
   &:before
     content "\f062"
@@ -131,17 +140,21 @@ footer.article-footer
   visibility visible
 
 //tags&categories
+.article-catetags
+  @media mini
+    width 60%
 .article-tags,.article-categories
   padding 0.5em 0
   float left
-  width 100%
-  @media phone
-    width 50%
+  /**width 100%**/
+  @media phonemax
+    width 100%
 
 .article-tags
   color lighten(color-gray,20%) 
-  @media mini
-    width 40%
+  margin-left 3em
+  @media phonemax
+    margin-left 0
   span
     position relative
     float left
@@ -165,8 +178,6 @@ footer.article-footer
 .article-categories
   color lighten(color-gray,20%)
   margin-top 0.3em
-  @media mini
-    width 20%
   span
     &:before
       font-family font-icon-family

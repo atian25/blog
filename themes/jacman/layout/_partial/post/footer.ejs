@@ -2,7 +2,9 @@
 <%- partial('catetags') %>
 <div class="article-share" id="share">
 <% if(theme.jiathis.enable){ %>
+<div class="share-jiathis">
   <%- partial('jiathis') %>
+ </div>
 <% } else { %>
   <div data-url="<%- item.permalink %>" data-title="<% if (item.title){ %><%= item.title %> | <% } %><%= config.title %>" data-tsina="<%= theme.author.tsina %>" class="share clearfix">
   </div>

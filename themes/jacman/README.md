@@ -5,6 +5,13 @@ It's a simple and cool theme forked from pacman. Modified some colors and displa
 
 [Demo](http://wuchong.me/)
 
+[How to Use Jacman](https://github.com/wuchong/jacman/wiki/How-To-Use-Jacman)
+
+##Newest Feature
+- weiboshow widget		[2014-6-28]
+- disqus comment		[2014-6-13]
+- google custom search
+- scroll to top
 
 ##Installation
 ###Install
@@ -23,4 +30,7 @@ git pull
 ##Configuration
 
 Modify settings in  `/themes/jacman/_config.yml`.
-[Learn More](https://github.com/wuchong/jacman/wiki/How-To-Use-Jacman)
+[Learn More](https://github.com/wuchong/jacman/wiki)
+
+##Add Your Site
+If you are using Jacman,you can add your site [here](https://github.com/wuchong/jacman/wiki/Sites) !

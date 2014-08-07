@@ -1,6 +1,6 @@
 # Hexo Configuration
 ## Docs: http://hexo.io/docs/configuration.html
-## Source: https://github.com/tommy351/hexo/
+## Source: https://github.com/hexojs/hexo/
 
 # Site
 title: 天猪部落阁
@@ -19,6 +19,7 @@ tag_dir: tags
 archive_dir: archives
 category_dir: categories
 code_dir: downloads/code
+permalink_defaults:
 
 # Directory
 source_dir: source
@@ -27,14 +28,12 @@ public_dir: public
 # Writing
 new_post_name: :title.md # File name of new posts
 default_layout: post
-auto_spacing: false # Add spaces between asian characters and western characters
 titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
-max_open_file: 100
-multi_thread: true
 filename_case: 0
 render_drafts: false
 post_asset_folder: false
+relative_link: false
 highlight:
   enable: true
   line_number: true
@@ -58,9 +57,9 @@ tag: 2
 ## You can customize the logger format as defined in
 ## http://www.senchalabs.org/connect/logger.html
 port: 4000
-server_ip: 0.0.0.0
+server_ip: localhost
 logger: false
-logger_format:
+logger_format: dev
 
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
@@ -78,25 +77,10 @@ pagination_dir: page
 disqus_shortname:
 
 # Extensions
-## Plugins: https://github.com/tommy351/hexo/wiki/Plugins
-## Themes: https://github.com/tommy351/hexo/wiki/Themes
+## Plugins: https://github.com/hexojs/hexo/wiki/Plugins
+## Themes: https://github.com/hexojs/hexo/wiki/Themes
 theme: jacman
 exclude_generator:
-
-# Markdown
-## https://github.com/chjj/marked
-markdown:
-  gfm: true
-  pedantic: false
-  sanitize: false
-  tables: true
-  breaks: true
-  smartLists: true
-  smartypants: true
-
-# Stylus
-stylus:
-  compress: false
 
 # Deployment
 ## Docs: http://hexo.io/docs/deployment.html

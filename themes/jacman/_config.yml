@@ -3,7 +3,7 @@ menu:
   首页: /
   归档: /archives
   关于: http://atian25.github.io/2014/05/10/job-ucweb/
-  ##关于: /about
+##关于: /about
 ## you can create `tags` and `categories` folders in `../source`.
 ## And create a `index.md` file in each of them.
 ## set `front-matter`as
@@ -17,7 +17,7 @@ widgets:
 - tag
 - links
 - rss
-## provide six widgets:category,tag,rss,archive,tagcloud,links.
+## provide seven widgets:category,tag,rss,archive,tagcloud,links,weibo
 ## modify links in `/layout/_widget/links.ejs`.
 
 #### RSS 
@@ -58,45 +58,56 @@ fancybox: true
 ## in theme folder `/jacman/scripts` to your hexo blog folder `../scritps`.
 
 ### Scroll to top
-totop: true
+totop: true   ##show scroll-to-top in article
 ##if you want to scroll to top in every post set the value to true
 
 #### Author information
 author:
-  google_plus: ##111190881341800841449    ## eg:116338260303228776998 for https://plus.google.com/u/0/116338260303228776998
-  intro_line1: "I'm TZ, work for UCWeb as a front-end-developer now." ## eg: "Hello ,I'm Larry Page in Google."
-  intro_line2: "I'll share my learning experience with you at this blog." ## eg: "This is my blog,believe it or not."
-  weibo: liuyong25     ## e.g. 436062867 for http://weibo.com/436062867
-  twitter:    ## e.g. yangjiansky for https://twitter.com/yangjiansky
-  github: atian25    ## e.g. A-limon for https://github.com/A-limon
-  facebook:   ## e.g. yangjian for https://favebook.com/yangjian
-  stackoverflow:  537353   ##e.g. 3222790 for http://stackoverflow.com/users/3222790/jark
-  douban: ##wuchong1014    ##e.g. wuchong1014 or your id for https://www.douban.com/people/wuchong1014
-  tsina: 1835555361     ## e.g. 1664838973  Your weibo ID,It will be used in share button.
-  email: #wuchong1014@gmail.com    ##email
+  intro_line1:  "天猪TZ，来自UC的一枚前端工程师"  ## eg: "Hello ,I'm Larry Page in Google."
+  intro_line2:  ""  ## eg: "This is my blog,believe it or not."
+  weibo:      liuyong25 ## e.g. wuchong1014 or 2176287895 for http://weibo.com/2176287895
+  twitter:    ## e.g. wuchong for https://twitter.com/wuchong
+  github:     atian25 ## e.g. wuchong for https://github.com/wuchong
+  facebook:   ## e.g. wuchong for https://facebook.com/wuchong
+  douban:     ## e.g. wuchong1014 or your id for https://www.douban.com/people/wuchong1014
+  tsina:      1835555361 ## e.g. 2176287895  Your weibo ID,It will be used in share button.
+  email:      ## e.g. wuchong1014@gmail.com
+  google_plus:    ## eg:111190881341800841449 for https://plus.google.com/u/0/111190881341800841449
+  stackoverflow:  537353 ##3222790   ##e.g. 3222790 for http://stackoverflow.com/users/3222790/jark
+## if you set them, the corresponding  share button will show on the footer
+ 
 
 #### Comment
 duoshuo: 
-  enable: true  ## duoshuo.com
-  short_name: atian25   ## duoshuo short name.
+  enable: false  ## duoshuo.com
+  short_name: atian25   ##e.g. wuchong   for duoshuo short name.
+
+disqus:
+  enable: false  ## disqus.com
+  short_name:    ##e.g. wuchong   for disqus short name.  
 
 #### Share button
 jiathis:
   enable: true ## if you use jiathis as your share tool,the built-in share tool won't be display.
-  id: 1394180256742186   ## e.g. 1501277 your jiathis ID. 
-  tsina: 1835555361 ## e.g. 1664838973 Your weibo id,It will be used in share button.
+  id:    1394180256742186 ## e.g. 1889330 your jiathis ID. 
+  tsina: 1835555361 ## e.g. 2176287895 Your weibo id,It will be used in share button.
 
 #### Custom Search
 google_cse: 
   enable: false
-  cx: 007309141952219334833:xwhzyjecwiy ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
-## https://www.google.com/cse/
+  cx:   007309141952219334833:xwhzyjecwiy ## e.g. 018294693190868310296:abnhpuysycw your Custom Search ID.
+## https://www.google.com/cse/ 
+## To enable the custom search You must create a "search" folder in '/source' and a "index.md" file
+## set the 'front-matter' as
+## layout: search 
+## title: search
+## ---
   
   
 #### Analytics
 google_analytics:
-  enable: true
-  id:   UA-636652-4  ## e.g. UA-46321946-2 your google analytics ID.
+  enable: false
+  id: UA-636652-4       ## e.g. UA-46321946-2 your google analytics ID.
   site: atian25.github.io     ## e.g. wuchong.me your google analytics site or set the value as auto.
 ## You MUST upgrade to Universal Analytics first!
 ## https://developers.google.com/analytics/devguides/collection/upgrade/?hl=zh_CN
