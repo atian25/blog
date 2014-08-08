@@ -79,7 +79,7 @@ author:
 
 #### Comment
 duoshuo: 
-  enable: false  ## duoshuo.com
+  enable: true  ## duoshuo.com
   short_name: atian25   ##e.g. wuchong   for duoshuo short name.
 
 disqus:
