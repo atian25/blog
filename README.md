@@ -2,7 +2,7 @@
 
 > 多年通信行业码农，目前在UC九游专注于移动互联网前端领域。
 > 
-> **ID:** 天猪 / atian25 , 微博: [@天猪TZ](http://weibo.com/liuyong25), 知乎: [@liuyong25](http://www.zhihu.com/people/liuyong25)
+> **ID:** 天猪 / atian25 , **微博:** [@天猪TZ](http://weibo.com/liuyong25) , **知乎:** [@liuyong25](http://www.zhihu.com/people/liuyong25)
 > 
 > **Keyword：** `前端` / `技术控` / `angular` / `nodejs` / `80后奶爸`
 
