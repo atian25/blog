@@ -11,8 +11,9 @@
 - 打桩工具: https://github.com/atian25/supermocker
 - Angular LazyLoad: https://github.com/atian25/angular-lazyload
 
-### 2. [博客内容](https://github.com/atian25/atian25.github.io/issues)
+### 2. 主要文章目录
 
+- [全部博客内容](https://github.com/atian25/atian25.github.io/issues)
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - 
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
