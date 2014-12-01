@@ -106,7 +106,7 @@ google_cse:
   
 #### Analytics
 google_analytics:
-  enable: false
+  enable: true
   id: UA-636652-4       ## e.g. UA-46321946-2 your google analytics ID.
   site: atian25.github.io     ## e.g. wuchong.me your google analytics site or set the value as auto.
 ## You MUST upgrade to Universal Analytics first!
