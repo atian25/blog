@@ -1,0 +1,19 @@
+<!doctype html>
+<head>
+  <title>天猪部落阁</title>
+  <script>
+    var pathList = location.pathname.replace(/^\//, '').split('/');
+    var labels = null;
+    var id = null;
+    if(pathList.length >= 1){
+      if(/\d+/.test(pathList[pathList.length-1])){
+        id = pathList.pop();
+      }
+      labels = pathList.join(',');
+    }
+    var base = 'https://github.com/atian25/atian25.github.io/issues';
+    var url =  base + (id ? '/' + id : (labels ? '?labels=' + labels : '') );
+    //console.log(url);
+    location.replace(url);
+  </script>
+</head>
