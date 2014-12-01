@@ -14,13 +14,13 @@
 - 前端工程
   - 
 - [Angular](https://github.com/atian25/atian25.github.io/issues?q=is%3Aopen+label%3Aangular)
-  - [angular性能优化心得](#5)
-  - [AngularJS进阶实践](#6)
+  - [angular性能优化心得](http://atian25.github.io/5)
+  - [AngularJS进阶实践](http://atian25.github.io/6)
 - 其他
-  - [Grunt+Livereload 搭建本地前端开发环境](#4)
+  - [Grunt+Livereload 搭建本地前端开发环境](http://atian25.github.io/4)
 - 杂谈
-  - [写简历的技巧](#3)
-  - 选择博客平台(#7)
+  - [写简历的技巧](http://atian25.github.io/3)
+  - [选择博客平台](http://atian25.github.io/7)
 
 ### 推荐博客/文章
 - @张云龙 https://github.com/fouber/blog 前端工程化
