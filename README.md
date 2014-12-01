@@ -17,7 +17,7 @@
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - 
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
-  - [angular性能优化心得](http://atian25.github.io/5)
+  - [AngularJS性能优化心得](http://atian25.github.io/5)
   - [AngularJS进阶实践](http://atian25.github.io/6)
 - 收集箱
   - [前端类库收集](http://atian25.github.io/1)
