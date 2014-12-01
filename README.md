@@ -11,11 +11,14 @@
 
 ### 2. [博客内容](https://github.com/atian25/atian25.github.io/issues)
 
-- [前端工程](https://github.com/atian25/atian25.github.io/issues?label%3A%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
+- [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - 
-- [Angular](https://github.com/atian25/atian25.github.io/issues?label%3Aangular)
+- [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
   - [angular性能优化心得](http://atian25.github.io/5)
   - [AngularJS进阶实践](http://atian25.github.io/6)
+- 收集箱
+  - [前端类库收集](http://atian25.github.io/1)
+  - [奇思妙想](http://atian25.github.io/2)
 - 其他
   - [Grunt+Livereload 搭建本地前端开发环境](http://atian25.github.io/4)
 - 杂谈
