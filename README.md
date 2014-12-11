@@ -1,9 +1,9 @@
 ## [天猪部落阁](http://atian25.github.io) -- 天猪的个人博客
 
 > 多年通信行业码农，目前在UC九游专注于移动互联网前端领域。
-> 
+>
 > **ID:** 天猪 / atian25 , **微博:** [@天猪TZ](http://weibo.com/liuyong25) , **知乎:** [@liuyong25](http://www.zhihu.com/people/liuyong25)
-> 
+>
 > **Keyword：** `前端` / `技术控` / `angular` / `nodejs` / `80后奶爸`
 
 ### 1. 我的开源项目
@@ -15,7 +15,7 @@
 
 - [全部博客内容](https://github.com/atian25/atian25.github.io/issues)
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
-  - 
+  - [量身打造angular开发解决方案](posts/angular-fis/01.md)
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
   - [AngularJS性能优化心得](http://atian25.github.io/5)
   - [AngularJS进阶实践](http://atian25.github.io/6)
