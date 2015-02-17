@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+  <title>riot-snake</title>
+  <style>
+    <!-- css borrow from http://zackargyle.github.io/ngSnake/ -->
+    * {
+      font-family: "Lucida Grande";
+    }
+
+    #gameContainer, #pastScores {
+      width: 600px;
+      float: left;
+    }
+
+    .row {
+      height: 26px;
+    }
+
+    .column {
+      border: 1px solid white;
+      width: 24px;
+      height: 24px;
+      display: inline-block;
+    }
+
+    .item-board{
+      background-color: #000;
+    }
+
+    .item-fruit{
+      background-color: #E80505;
+    }
+
+    .item-head{
+      background-color: #078F00;
+    }
+
+    .item-body{
+      background-color: #0DFF00;
+    }
+
+    .item-tail{
+      background-color: #0DFF00;
+    }
+
+    #btn {
+      width: 120px;
+      padding: 10px;
+      margin-top: 5px;
+      text-align: center;
+      background-color: black;
+      color: white;
+    }
+
+    #btn:hover {
+      color: red;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<snake-board>
+</snake-board>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/riot/2.0.9/riot.min.js"></script>
+
+<script id="snake.tpl.html" type="riot/type">
+  <div id="gameContainer">
+    <h3>Score: {{score}},  Max: {{maxScore}}</h3>
+    <div>
+      <div each="{{column, i in data}}" class="row" data-row="{{i}}">
+        <div each="{{row, j in column}}" class="column {{'item-'+row.type}}" data-col="{{parent.i+'-'+j}}"></div>
+      </div>
+    </div>
+    <div id="btn" onclick="{{startGame}}">Start Game</div>
+  </div>
+</script>
+
+<script>
+  riot.settings.brackets = '{{ }}';
+  riot.tag('snake-board', document.getElementById('snake.tpl.html').innerHTML, function(opts){
+    var self = this;
+    self.size = opts.size || 20;
+    self.data = [];
+    self.snake = [];
+    self.maxScore = 0;
+    self.fruit = {x: 10, y: 10};
+
+    self.init = function(){
+      self.data = [];
+      for(var i = 0; i < self.size; i++) {
+        var column = [];
+        for (var j = 0; j < self.size; j++) {
+          column.push({type: 'board'});
+        }
+        self.data.push(column);
+      }
+
+      var snake = self.snake = [];
+      for (var k = 0; k < 5; k++) {
+        var point = {x: 10 + k, y: 10};
+        snake.push(point);
+        self.changeType(point, 'body');
+      }
+      self.changeType(snake[0], 'head');
+      self.changeType(snake[[k-1]], 'tail');
+
+      self.direction = {x: -1, y: 0};
+
+      self.resetFruit();
+
+      self.score = 0;
+
+      self.speed = opts.speed || 150;
+
+      self.isGameOver = true;
+
+      if(self.timer){
+        clearTimeout(self.timer);
+        self.timer = undefined;
+      }
+
+      self.update();
+    };
+
+    self.updateBoard = function(){
+      var nextPoint = self.getNextPoint();
+      if(self.isCollision(nextPoint)){
+        self.gameOver();
+      }else{
+        if(self.isFruit(nextPoint)){
+          self.eatFruit();
+        }else{
+          self.moveSnake();
+        }
+        setTimeout(self.updateBoard, self.speed);
+      }
+    };
+
+    self.getNextPoint = function(){
+      return {
+        x: self.snake[0].x + self.direction.x,
+        y: self.snake[0].y + self.direction.y
+      }
+    };
+
+    self.resetFruit = function(){
+      var point = {
+        x: Math.floor(Math.random() * self.size),
+        y: Math.floor(Math.random() * self.size)
+      };
+
+      var isSnake = self.snake.some(function(item){ return item.x === point.x && item.y === point.y; });
+
+      self.fruit = isSnake ? self.resetFruit() : point;
+      self.changeType(self.fruit, 'fruit');
+      self.update();
+    };
+
+    self.isCollision = function(point){
+      return point.x < 0 || point.y < 0 || point.x >= self.size || point.y >= self.size || self.snake.some(function(item){ return item.x === point.x && item.y === point.y; });
+    };
+
+    self.isFruit = function(point){
+      return point.x === self.fruit.x && point.y === self.fruit.y;
+    };
+
+    self.eatFruit = function(){
+      self.score++;
+      self.maxScore = Math.max(self.maxScore, self.score);
+      if (self.score % 5 === 0) {
+        self.speed -= 15;
+      }
+      self.moveSnake(true);
+      self.resetFruit();
+    };
+
+    self.moveSnake = function(keep){
+      var snake = self.snake;
+
+      if(!keep){
+        // Remove tail
+        var oldTail = snake.pop();
+        self.changeType(oldTail, 'board');
+
+        // Add new tail
+        var newTail = snake[snake.length - 1];
+        self.changeType(newTail, 'tail');
+      }
+
+      // Remove head
+      var oldHead = snake[0];
+      self.changeType(oldHead, 'body');
+
+      // Add new head
+      var newHead = self.getNextPoint();
+      self.snake.unshift(newHead);
+      self.changeType(newHead, 'head');
+
+      self.update();
+    };
+
+    self.changeType = function(point, type){
+      this.data[point.y][point.x].type = type;
+    };
+
+    self.bindEvent = function(){
+      window.addEventListener("keyup", function(e){
+        var x = self.direction.x;
+        var y = self.direction.y;
+        var code = e.keyCode;
+
+        if(code === 37 && x !== 1){
+          x = -1;
+          y = 0;
+        }else if(code === 39 && x !== -1){
+          x = 1;
+          y = 0;
+        }else if(code === 38 && y !== 1){
+          x = 0;
+          y = -1;
+        }else if(code === 40 && y !== -1){
+          x = 0;
+          y = 1;
+        }
+        self.direction = {x: x, y: y};
+      });
+    };
+
+    self.gameOver = function(){
+      self.isGameOver = true;
+      console.log('game over');
+    };
+
+    self.startGame = function(){
+      if(self.isGameOver) {
+        self.init();
+        self.updateBoard();
+      }
+    };
+
+    self.on('mount', function(){
+      self.init();
+      self.bindEvent();
+
+      self.startGame();
+    });
+  }); 
+  riot.mount('*');
+</script>
+
+</body>
+</html>
+
