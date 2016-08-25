@@ -1,12 +1,13 @@
 ## [天猪部落阁](http://atian25.github.io) -- 天猪的个人博客
 
-> 多年通信行业码农，目前在UC九游专注于移动互联网前端领域。
+> 多年通信行业码农，目前在阿里移动事业群(即 UC 九游), 专注于移动互联网前端领域。
 >
 > **ID:** 天猪 / atian25 , **微博:** [@天猪TZ](http://weibo.com/liuyong25) , **知乎:** [@liuyong25](http://www.zhihu.com/people/liuyong25)
 >
 > **Keyword：** `前端` / `技术控` / `angular` / `nodejs` / `80后奶爸`
 
 ### 1. 我的开源项目
+- **egg - 企业级的 node 框架**: https://github.com/eggjs
 - 微信公众平台Node类库: https://github.com/node-webot
 - 打桩工具: https://github.com/atian25/supermocker
 - Angular LazyLoad: https://github.com/atian25/angular-lazyload
