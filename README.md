@@ -15,6 +15,7 @@
 ### 2. 主要文章目录
 
 - [全部博客内容](https://github.com/atian25/atian25.github.io/issues)
+- [egg - JSConf China 2016 的分享](https://github.com/atian25/blog/issues/13)
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - [量身打造angular开发解决方案](posts/angular-fis/01.md)
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
