@@ -18,14 +18,11 @@
 - [egg - JSConf China 2016 的分享](https://github.com/atian25/blog/issues/13)
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - [量身打造angular开发解决方案](posts/angular-fis/01.md)
+- [质量]
+  - [No API is the best API - 抛弃 should/expect/chai 吧](https://github.com/atian25/blog/issues/16)
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
   - [AngularJS性能优化心得](http://atian25.github.io/5)
   - [AngularJS进阶实践](http://atian25.github.io/6)
-- 收集箱
-  - [前端类库收集](http://atian25.github.io/1)
-  - [奇思妙想](http://atian25.github.io/2)
-- 其他
-  - [Grunt+Livereload 搭建本地前端开发环境](http://atian25.github.io/4)
 - 杂谈
   - [写简历的技巧](http://atian25.github.io/3)
   - [选择博客平台](http://atian25.github.io/7)
