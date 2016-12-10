@@ -4,7 +4,7 @@
 >
 > **ID:** 天猪 / atian25 , **微博:** [@天猪TZ](http://weibo.com/liuyong25) , **知乎:** [@liuyong25](http://www.zhihu.com/people/liuyong25)
 >
-> **Keyword：** `前端` / `技术控` / `angular` / `nodejs` / `80后奶爸`
+> **Keyword：** `前端` / `技术控` / `nodejs` / `vue` / `egg` / `80后奶爸`
 
 ### 1. 我的开源项目
 - **egg - 企业级的 node 框架**: https://github.com/eggjs
@@ -18,7 +18,7 @@
 - [egg - JSConf China 2016 的分享](https://github.com/atian25/blog/issues/13)
 - [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - [量身打造angular开发解决方案](posts/angular-fis/01.md)
-- [质量]
+- 质量
   - [No API is the best API - 抛弃 should/expect/chai 吧](https://github.com/atian25/blog/issues/16)
 - [Angular](https://github.com/atian25/atian25.github.io/labels/angular)
   - [AngularJS性能优化心得](http://atian25.github.io/5)
