@@ -1,25 +1,22 @@
-## [天猪部落阁](http://atian25.github.io) -- 天猪的个人博客
+## [天猪部落阁](http://atian25.github.io) 
 
-> 多年通信行业码农，目前在阿里移动事业群(即 UC 九游), 专注于移动互联网前端领域。
+> EggJS 核心开发者，开源爱好者，目前就职于阿里巴巴游戏事业群，广州。
 >
 > **ID:** 天猪 / atian25 , **微博:** [@天猪TZ](http://weibo.com/liuyong25) , **知乎:** [@liuyong25](http://www.zhihu.com/people/liuyong25)
 >
-> **Keyword：** `前端` / `技术控` / `nodejs` / `vue` / `egg` / `80后奶爸`
+> **Keyword：** `前端` / `技术控` / `Egg` / `Node.js` / `Vue` / `80后奶爸`
 
 ### 1. 我的开源项目
-- **egg - 企业级的 node 框架**: https://github.com/eggjs
-- 微信公众平台Node类库: https://github.com/node-webot
-- 打桩工具: https://github.com/atian25/supermocker
-- Angular LazyLoad: https://github.com/atian25/angular-lazyload
-
-### 2. 主要文章目录
-
-- [全部博客内容](https://github.com/atian25/atian25.github.io/issues)
-- egg
+- **Egg - 企业级的 Node.js 框架**: https://eggjs.org/
   - [知乎： 如何评价阿里开源的企业级 Node.js 框架 egg？](https://github.com/atian25/blog/issues/18)
   - [egg - JSConf China 2016 的分享](https://github.com/atian25/blog/issues/13)
   - [Egg & Node.js 从小工坊走向企业级开发](https://github.com/atian25/blog/issues/20)
-- [前端工程](https://github.com/atian25/atian25.github.io/labels/%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
+  
+### 2. 主要文章目录
+
+- [全部博客内容](https://github.com/atian25/atian25.github.io/issues)
+- [Egg](https://github.com/atian25/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aeggjs)
+- [前端工程](https://github.com/atian25/blog/issues?q=is%3Aopen+is%3Aissue+label%3Aeggjs+label%3A%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B)
   - [量身打造angular开发解决方案](posts/angular-fis/01.md)
 - 质量
   - [No API is the best API - 抛弃 should/expect/chai 吧](https://github.com/atian25/blog/issues/16)
